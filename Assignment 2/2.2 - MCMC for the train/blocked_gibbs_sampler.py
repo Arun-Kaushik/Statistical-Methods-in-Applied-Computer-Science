@@ -145,64 +145,64 @@ def blocked_gibbs_sampler_switch_settings(switch_settings, train_track, observat
         A blocked sampler for the switch settings.
     """
 
-	block_1 = [0, 2, 4]
-	block_2 = [3, 5, 7]
-	block_3 = [1, 6, 8]
+    block_1 = [0, 2, 4]
+    block_2 = [3, 5, 7]
+    block_3 = [1, 6, 8]
 
-	block_indicies = [block_1, block_2, block_3]
+    block_indicies = [block_1, block_2, block_3]
 
-	# We create an array of the switches in the last samplex switch setting(s) X
-	switch_settings_last = switch_settings[-1]
-	switch_settings_last = make_deepcopy(
-		switch_settings_last, train_track.lattice_size)
-	switch_settings_last = convert_matrix_to_array(switch_settings_last)
+    # We create an array of the switches in the last samplex switch setting(s) X
+    switch_settings_last = switch_settings[-1]
+    switch_settings_last = make_deepcopy(
+        switch_settings_last, train_track.lattice_size)
+    switch_settings_last = convert_matrix_to_array(switch_settings_last)
 
-	for block in block_indicies:
-		log_likelihoods = []
-		# So for the three blocks we want to go though all possible swithc setting for each position
-		# Also note that we need three nested loops since we want to compute all possible cobintaions of switch settiings
-		# for the three blocks
+    for block in block_indicies:
+        log_likelihoods = []
+        # So for the three blocks we want to go though all possible swithc setting for each position
+        # Also note that we need three nested loops since we want to compute all possible cobintaions of switch settiings
+        # for the three blocks
 
-		switch_settings_upper = 4
-		switch_settings_lower = 1
+        switch_settings_upper = 4
+        switch_settings_lower = 1
 
-		for switch_settings_block1 in range(switch_settings_lower, switch_settings_upper):
-			for switch_settings_block2 in range(switch_settings_lower, switch_settings_upper):
-				for switch_settings_block3 in range(switch_settings_lower, switch_settings_upper):
+        for switch_settings_block1 in range(switch_settings_lower, switch_settings_upper):
+            for switch_settings_block2 in range(switch_settings_lower, switch_settings_upper):
+                for switch_settings_block3 in range(switch_settings_lower, switch_settings_upper):
 
-					ind_b1 = block[0]
-					switch_settings_last[ind_b1] = switch_settings_block1
+                    ind_b1 = block[0]
+                    switch_settings_last[ind_b1] = switch_settings_block1
 
-					ind_b2 = block[1]
-					switch_settings_last[ind_b2] = switch_settings_block2
+                    ind_b2 = block[1]
+                    switch_settings_last[ind_b2] = switch_settings_block2
 
-					ind_b3 = block[2]
-					switch_settings_last[ind_b3] = switch_settings_block3
+                    ind_b3 = block[2]
+                    switch_settings_last[ind_b3] = switch_settings_block3
 
-					# We convert the array into a matrix again so taht we can send it into compute_conditional_likelihood()
-					switch_settings_last = convert_array_to_matrix(
-						switch_settings_last)
+                    # We convert the array into a matrix again so taht we can send it into compute_conditional_likelihood()
+                    switch_settings_last = convert_array_to_matrix(
+                        switch_settings_last)
 
-					start_position = start_positions[-1]
+                    start_position = start_positions[-1]
 
-					prior = math.log(1 / 3)
-					log_likelihood = compute_conditional_likelihood(
-						observations, train_track, start_position, switch_settings_last, error_prob) + prior
-					log_likelihoods.append(log_likelihood)
-					switch_settings_last = convert_matrix_to_array(
-						switch_settings_last)
+                    prior = math.log(1 / 3)
+                    log_likelihood = compute_conditional_likelihood(
+                        observations, train_track, start_position, switch_settings_last, error_prob) + prior
+                    log_likelihoods.append(log_likelihood)
+                    switch_settings_last = convert_matrix_to_array(
+                        switch_settings_last)
 
-		likelihoods = unlog_likelihoods(log_likelihoods)
-		distribution = normalize_distribution(likelihoods)
+        likelihoods = unlog_likelihoods(log_likelihoods)
+        distribution = normalize_distribution(likelihoods)
 
-		# Categorical resmapling
-		switch_setting_sample = categorical_sampling(distribution)
+        # Categorical resmapling
+        switch_setting_sample = categorical_sampling(distribution)
 
-		# We extract the new indicies for the new sampled switch setting.
-		switch_setting_sample = extractor(switch_setting_sample, switch_settings_block2,
-						  switch_settings_block3, switch_settings_last, block)
+        # We extract the new indicies for the new sampled switch setting.
+        switch_setting_sample = extractor(switch_setting_sample, switch_settings_block2,
+                          switch_settings_block3, switch_settings_last, block)
 
-	return switch_setting_sample
+    return switch_setting_sample
 
 
 def normalize_distribution(likelihoods):
