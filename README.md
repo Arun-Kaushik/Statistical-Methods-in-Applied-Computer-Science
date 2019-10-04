@@ -12,7 +12,7 @@ The first part of the next assignment was to estimate a posterior distribution w
 data. For a detailed description of the assignment see: Assignment_2_Description.pdf, section: 2.1 Gibbs sampler for the magic word.
 
 #### Excerpt of some results
-Histograms of sampled start positions used to estimate the start position distributions, for two different word sequences where the true star position can be found in the plot header:
+Histograms of sampled start positions used to estimate the start position distributions, for two different word sequences where the true start position can be found in the plot header:
 <p float="left" align='center'>  
   <img src='https://github.com/alexandrahotti/Statistical-Methods-in-Applied-Computer-Science/blob/master/Assignment%202/2.1%20-%20Magic%20Word%20Gibbs%20Sampler/results/dist_word_seq_1.png' width="40%" height="40%"
  /><img src='https://github.com/alexandrahotti/Statistical-Methods-in-Applied-Computer-Science/blob/master/Assignment%202/2.1%20-%20Magic%20Word%20Gibbs%20Sampler/results/dist_word_seq_2.png' width="40%" height="40%"
@@ -23,6 +23,14 @@ Histograms of sampled start positions used to estimate the start position distri
 The next part of the assignment was to compare different combinations of Markov Chain Monte Carlo methods such as Metropolis Hastings, 
 Gibbs sampling and blocked Gibbs sampling to estimate the posterior for the switch settings of a train riding along a
 railway. For a detailed description of the assignment see: Assignment_2_Description.pdf, section: 2.2 MCMC for the train.
+
+#### Excerpt of some results
+Histograms of sampled start positions used to estimate the start position distributions, for  where the true start position can be found in the plot header:
+<p float="left" align='center'>  
+  <img src='https://github.com/alexandrahotti/Statistical-Methods-in-Applied-Computer-Science/blob/master/Assignment%202/2.2%20-%20MCMC%20for%20the%20train/results/sampled%20start%20positions%20-%20Blocked%20Gibbs.png' width="40%" height="40%"
+ /><img src='https://github.com/alexandrahotti/Statistical-Methods-in-Applied-Computer-Science/blob/master/Assignment%202/2.2%20-%20MCMC%20for%20the%20train/results/sampled%20start%20positions%20-%20Gibbs.png' width="40%" height="40%"
+ /><img src='https://github.com/alexandrahotti/Statistical-Methods-in-Applied-Computer-Science/blob/master/Assignment%202/2.2%20-%20MCMC%20for%20the%20train/results/sampled%20start%20positions%20-%20Metropolis%20Hastings%20within%20Gibbs.png' width="40%" height="40%"
+ />
 
 ### Assignment 2.3
 The next assignment was to implement sequential Monte Carlo on a Stochastic Volatility model (SVM) using sequential
